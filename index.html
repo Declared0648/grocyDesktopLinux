@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home Stock</title>
+  <style>
+    html, body { width: 100%; height: 100%; margin: 0; overflow: hidden; background: #f7f8f4; }
+    canvas { width: 100%; height: 100%; display: block; outline: none; }
+    #loading { position: fixed; inset: 0; display: grid; place-items: center; color: #27362b; font: 16px system-ui, sans-serif; }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading Home Stock…</div>
+  <canvas id="the_canvas_id"></canvas>
+  <script type="module">
+    import init, { start } from "./pkg/pantry-desk.js";
+    try {
+      await init();
+      document.getElementById("loading").remove();
+      await start();
+    } catch (error) {
+      document.getElementById("loading").textContent = `Could not start Home Stock: ${error}`;
+      console.error(error);
+    }
+  </script>
+</body>
+</html>
